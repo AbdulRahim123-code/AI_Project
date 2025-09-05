@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prevent body scrolling when chat is active */
+body {
+  overflow: hidden;
+}
+
+/* Allow scrolling only in chat message area */
+.chat-messages {
+  overflow-y: auto;
+}
