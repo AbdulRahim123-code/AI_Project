@@ -24,7 +24,7 @@ export default function NavBar() {
       <div className="flex items-center gap-3">
         {user ? (
           <>
-            <span className="text-gray-700">Hi, {user.email}</span>
+            <span className="text-gray-700">Hi {user.email}</span>
             <button
               onClick={logout}
               className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition"

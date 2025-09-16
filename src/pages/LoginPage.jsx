@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
-import BackButton from "../utlis/BackButton"; // Optional: Back button component
+import BackButton from "../utlis/BackButton";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState(""); // 🔥 username instead of email
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -16,14 +16,13 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5000/auth/login", {
-        username, // 🔥 send username
+        username,
         password,
       });
 
       // Save user & token in context/localStorage
-      login(res.data.username, res.data.token);
+      login(res.data.username, res.data.token, res.data.email);
 
-      // Redirect to chat
       navigate("/chat");
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");

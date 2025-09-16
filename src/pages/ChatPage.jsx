@@ -51,7 +51,10 @@ export default function ChatPage() {
     setMessages((prev) => [...prev, userMessage]);
 
     try {
-      const res = await api.post("/ask", { message: input });
+      const res = await api.post("/ask", {
+        message: input,
+        threadId: selectedThreadId,
+      });
 
       setMessages((prev) => [
         ...prev,
@@ -96,9 +99,22 @@ export default function ChatPage() {
   };
 
   // Clear chat (start new)
-  const handleNewThread = () => {
-    setSelectedThreadId(null);
-    setMessages([]);
+  // Start a completely new thread
+  const handleNewThread = async () => {
+    try {
+      const res = await api.post("/thread/new");
+      const newThreadId = res.data.threadId;
+
+      setSelectedThreadId(newThreadId); // ✅ use this new thread
+      setMessages([]); // clear chat
+
+      console.log("✅ New thread created:", newThreadId);
+    } catch (error) {
+      console.error("❌ Failed to create a new thread:", error);
+      // fallback: still clear chat UI
+      setSelectedThreadId(null);
+      setMessages([]);
+    }
   };
 
   return (

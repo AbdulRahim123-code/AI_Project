@@ -16,7 +16,7 @@ export default function Sidebar({
         .then((res) => setThreads(res.data))
         .catch(() => setThreads([]));
     }
-  }, [user]);
+  }, [user, onNewThread]); // ✅ refresh threads when new chat created
 
   // Delete thread handler
   const handleDeleteThread = async (threadId) => {

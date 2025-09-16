@@ -15,9 +15,10 @@ function WelcomeScreen() {
         <main className="w-full max-w-3xl flex flex-col items-center text-center px-3 sm:px-4 flex-grow">
           <h1 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-6 mt-2">
             {user
-              ? `Welcome back, ${user.username}!`
+              ? `Welcome back, ${user.username || user.email}!`
               : "Need help managing your project?"}
           </h1>
+
           <img
             src="/illustration.png"
             alt="AI Help"
